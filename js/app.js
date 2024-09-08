@@ -29,6 +29,8 @@ const newSection = document.createElement("section");
 // Grabs the root of the content.
 const main = document.querySelector("main");
 
+const backToTopBtn = document.querySelector("#back__to__top");
+
 
 /**
  * End Global Variables
@@ -100,4 +102,22 @@ function setActiveSection() {
 
 
 window.addEventListener('scroll', setActiveSection);
+//shows backbutton near bottom of page. 80 to add a bit of buffer if the user is not 100% at the bottom. Lines up with the black footer section
+function showBackToTopButton(){
+    if(window.scrollY >= document.documentElement.scrollHeight - window.innerHeight - 80) {
+        backToTopBtn.style.display = "block";
+    } else {
+        backToTopBtn.style.display = "none";
+    }
+}
+//runs function on scroll to check if back to top button should display
+window.onscroll = function() {
+    showBackToTopButton();
+}
 
+//event listener for the button click to move to the top of the page. 
+backToTopBtn.addEventListener("click", function() {
+    window.scrollTo({
+        top: 0
+    });
+});
